@@ -1,0 +1,32 @@
+{% extends 'base' %}
+
+{% block content %}
+    <div class="row mt-4">
+        <div class="col">
+            <h2>Agregar Item</h2>
+
+            <form action="agregarForm/" method="post" class="form-inline">
+                {% csrf_token %}
+                <input type="text" name="contenido" class="form-control mb-2 mr-sm-2" placeholder="Escribir aqui...">
+                <button type="submit" class="btn btn-primary mb-2">Agregar</button>
+            </form>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+          <ul class="list-group">
+              {% for elemento in elementos %}
+                <li class="list-group-item">{{ elemento.texto }}
+                    <div class="float-right">
+                        <form action="borrarItem/{{ elemento.id }}" action="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </li>
+              {% endfor %}
+          </ul>
+        </div>
+    </div>
+{% endblock content %}
